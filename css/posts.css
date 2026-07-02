@@ -1,0 +1,152 @@
+/* ===== 기본 리셋 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* ===== 상단 헤더 ===== */
+.app-header {
+  position: relative; /* 프로필 버튼을 오른쪽에 절대배치하기 위한 기준 */
+  background-color: #fff;
+  border-bottom: 1px solid #333;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.app-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* 오른쪽 프로필 아바타 */
+.profile-btn {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%); /* 세로 정중앙 */
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* 동그라미 */
+  border: 1px solid #ccc;
+  background-color: #d9d9d9; /* 이미지 들어오기 전 회색 원 */
+  cursor: pointer;
+}
+
+/* ===== 게시판 본문 (가운데 좁은 칼럼) ===== */
+.board {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto; /* 가로 가운데 정렬 */
+  padding: 40px 16px 80px;
+}
+
+/* 인사 문구 */
+.board-greeting {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* ===== 게시글 작성 버튼 (우측 정렬) ===== */
+.write-row {
+  display: flex;
+  justify-content: flex-end; /* 오른쪽으로 */
+  margin-bottom: 16px;
+}
+
+.write-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 16px; /* 알약 모양 */
+  font-size: 13px;
+  color: #fff;
+  text-decoration: none;
+
+  background-color: #aca0eb; /* 기본 색 */
+  transition: background-color 0.2s;
+}
+
+.write-btn:hover {
+  background-color: #7f6aee; /* 호버 시 진한 보라 */
+}
+
+/* ===== 게시글 목록 ===== */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* 카드 사이 간격 */
+}
+
+/* 카드 한 장 */
+.post-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer; /* 클릭 시 상세로 이동할 거라 손가락 커서 */
+  transition: box-shadow 0.2s;
+}
+
+.post-card:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* 제목 — 26자 넘으면 한 줄로 자르고 ... 처리 */
+.post-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+
+  white-space: nowrap;     /* 줄바꿈 금지 */
+  overflow: hidden;        /* 넘치면 숨김 */
+  text-overflow: ellipsis; /* 넘친 부분 ... 으로 */
+}
+
+/* 좋아요/댓글/조회수 + 날짜 줄 */
+.post-meta {
+  display: flex;
+  justify-content: space-between; /* 통계는 왼쪽, 날짜는 오른쪽 */
+  align-items: center;
+  font-size: 12px;
+  color: #888;
+}
+
+/* 구분선 */
+.post-divider {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 16px 0;
+}
+
+/* 작성자 줄 */
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #d9d9d9; /* 회색 원 (프로필 이미지 자리) */
+}
+
+.author-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* 인피니티 스크롤 감지용 (보이지 않아도 되는 표식) */
+#scroll-sentinel {
+  height: 1px;
+}

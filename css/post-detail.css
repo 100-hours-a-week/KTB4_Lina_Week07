@@ -1,0 +1,339 @@
+/* ===== 기본 리셋 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* 모달이 열렸을 때 body에 이 클래스를 붙이면 배경 스크롤이 막힘 (JS에서 toggle) */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* ===== 상단 헤더 ===== */
+.app-header {
+  position: relative;
+  background-color: #fff;
+  border-bottom: 1px solid #333;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.app-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* 아이콘 버튼 공통 (뒤로가기) */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+}
+
+.back-btn {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  transform: translateY(-50%);
+}
+
+.profile-btn {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background-color: #d9d9d9;
+  cursor: pointer;
+}
+
+/* ===== 본문 영역 ===== */
+.detail {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 32px 16px 80px;
+}
+
+/* 게시글 제목 */
+.post-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* 작성자·날짜 / 수정·삭제 한 줄 */
+.post-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  flex-shrink: 0;
+}
+
+.author-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #888;
+}
+
+/* 수정/삭제 같은 작은 회색 버튼 */
+.post-actions,
+.comment-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.small-btn {
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #555;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.small-btn:hover {
+  background-color: #f0f0f0;
+}
+
+/* 구분선 */
+.divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+/* 본문 이미지 (회색 박스) */
+.post-image {
+  width: 100%;
+  height: 320px;
+  background-color: #d9d9d9;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* 본문 내용 */
+.post-content {
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap; /* 줄바꿈(\n)을 그대로 표시 */
+  margin-bottom: 24px;
+}
+
+/* ===== 좋아요/조회수/댓글수 박스 ===== */
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  width: 100px;
+  padding: 14px 0;
+  background-color: #d9d9d9;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+}
+
+.stat-num {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #555;
+}
+
+/* 좋아요 버튼: 클릭 가능 + 눌린(활성) 상태 */
+.like-box {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* JS에서 좋아요 눌렀을 때 이 클래스를 붙이면 색이 바뀜 */
+.like-box.liked {
+  background-color: #aca0eb;
+}
+
+.like-box.liked .stat-label {
+  color: #fff;
+}
+
+/* ===== 댓글 입력 ===== */
+.comment-form {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.comment-input {
+  width: 100%;
+  min-height: 80px;
+  border: none;
+  outline: none;
+  resize: none; /* 크기 조절 핸들 숨김 */
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.comment-form-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.comment-submit {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 16px;
+  font-size: 13px;
+  color: #fff;
+  background-color: #aca0eb; /* 기본(비활성) */
+  cursor: not-allowed;
+  transition: background-color 0.2s;
+}
+
+/* 입력이 있으면 JS에서 active 붙임 → 진한 보라 */
+.comment-submit.active {
+  background-color: #7f6aee;
+  cursor: pointer;
+}
+
+/* ===== 댓글 목록 ===== */
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comment-item {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 16px;
+}
+
+.comment-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #888;
+}
+
+.comment-content {
+  font-size: 14px;
+  line-height: 1.6;
+  padding-left: 36px; /* 아바타 너비만큼 들여쓰기 */
+}
+
+/* ===== 모달 ===== */
+/* 오버레이: 화면 전체를 덮는 반투명 검정 배경 */
+.modal-overlay {
+  display: none; /* 기본은 숨김. JS에서 열 때 flex로 변경 */
+  position: fixed;
+  inset: 0; /* top/right/bottom/left 0 = 화면 꽉 채움 */
+  background-color: rgba(0, 0, 0, 0.5); /* 50% 블랙 */
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/* JS에서 이 클래스를 붙이면 모달이 보임 (display:flex) */
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal {
+  width: 320px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.modal-desc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.modal-cancel,
+.modal-confirm {
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.modal-cancel {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.modal-confirm {
+  background-color: #aca0eb;
+  color: #fff;
+}
