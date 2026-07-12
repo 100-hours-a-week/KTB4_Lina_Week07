@@ -15,10 +15,13 @@ const withdrawConfirm = withdrawModal.querySelector('.modal-confirm');
 
 // 페이지 열 때 내 정보 불러오기
 async function loadMyInfo() {
-    const token = localStorage.getItem('token');
+
+    const token = localStorage.getItem('accessToken');
 
     const res = await fetch('http://localhost:8080/users/me', {
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
     });
     const result = await res.json();
     console.log(result);
@@ -54,18 +57,18 @@ profileForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!validateNickname()) return;
 
-    const token = localStorage.getItem('token');
-
     let profileUrl = null;
     if(profileInput.files.length > 0){
         profileUrl = await uploadImage(profileInput.files[0]);
     }
 
+    const token = localStorage.getItem('accessToken');
+
     const res = await fetch('http://localhost:8080/users/profile', {
         method: 'PATCH',
         headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
         nickname: nicknameInput.value.trim(),
@@ -102,14 +105,23 @@ withdrawBtn.addEventListener('click', () => openModal(withdrawModal));
 withdrawCancel.addEventListener('click', () => closeModal(withdrawModal));
 
 withdrawConfirm.addEventListener('click', async () => {
-    const token = localStorage.getItem('token');
+
+    const token = localStorage.getItem('accessToken');
+
     const res = await fetch('http://localhost:8080/users',{
         method: 'DELETE',
-        headers: {'Authorization': `Bearer ${token}`},
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
     });
 
     if(res.ok){
-        localStorage.removeItem('token');
         window.location.href = './login.html';
     }
 });
+
+ // 뒤로가기
+ const backBtn = document.getElementById('back-btn');
+ backBtn.addEventListener('click', () => {
+    window.location.href = './posts.html';
+ });

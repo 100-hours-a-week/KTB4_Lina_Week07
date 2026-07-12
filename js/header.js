@@ -13,16 +13,35 @@ if (headerProfileBtn && headerDropdown) {
     headerDropdown.classList.toggle('show');
   });
 
-  // 메뉴 바깥 아무 곳이나 클릭하면 닫기
   document.addEventListener('click', () => {
     headerDropdown.classList.remove('show');
   });
 }
 
-// 로그아웃 → 토큰 삭제하고 로그인 페이지로
 if (headerLogoutBtn) {
   headerLogoutBtn.addEventListener('click', () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accessToken');
     window.location.href = './login.html';
   });
+}
+
+if(headerProfileBtn){
+  const token = localStorage.getItem('accessToken');
+
+  fetch('http://localhost:8080/users/me', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  .then(res => res.ok ? res.json() : null)
+  .then(result => {
+    const img = result?.data?.profile_image;
+    if(img) {
+      headerProfileBtn.style.backgroundImage = `url(${img})`;
+      headerProfileBtn.style.backgroundSize = 'cover';
+      headerProfileBtn.style.backgroundPosition = 'center';
+    }
+  })
+  .catch(() => {});
 }

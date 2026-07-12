@@ -3,6 +3,7 @@ const params = new URLSearchParams(window.location.search);
 const postId = params.get('id');
 
 const postTitle = document.getElementById('post-title');
+const authorAvatar = document.getElementById('author-avatar');
 const authorName = document.getElementById('author-name');
 const postImage = document.getElementById('post-image');
 const postContent = document.getElementById('post-content');
@@ -48,10 +49,18 @@ function renderDetail(post){
     viewCount.textContent = formatCount(post.viewsCount);
     commentCount.textContent = formatCount(post.commentsCount);
 
+    if(post.author.profileImage){
+        authorAvatar.style.backgroundImage = `url(${post.author.profileImage})`;
+        authorAvatar.style.backgroundSize = 'cover';
+        authorAvatar.style.backgroundPosition = 'center';
+    }
+
     if(post.image){
         postImage.style.backgroundImage = `url(${post.image})`;
         postImage.style.backgroundSize = 'cover';
         postImage.style.backgroundPosition = 'center';
+    } else {
+        postImage.style.display = 'none';
     }
 
     commentList.innerHTML = '';
@@ -71,11 +80,15 @@ loadPostDetail();
 
 // 좋아요 토글(event+fetch)
 likeBtn.addEventListener('click', async() => {
-    const token = localStorage.getItem('token');
+
+    const token = localStorage.getItem('accessToken');
+    console.log('좋아요 요청 토큰:', token);
 
     const res = await fetch(`http://localhost:8080/posts/${postId}/likes`,{
         method: 'POST',
-        headers: {'Authorization' : `Bearer ${token}`},
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
     });
     const result = await res.json();
     console.log(result);
@@ -108,14 +121,16 @@ postCancel.addEventListener('click', () => closeModal(postDeleteModal));
 
 // 확인 버튼 누름(fetch)
 postConfirm.addEventListener('click', async () => {
-  const token = localStorage.getItem('token');
-  const res = await fetch(`http://localhost:8080/posts/${postId}`, {
-    method: 'DELETE',
-    headers: { 'Authorization': `Bearer ${token}` },
-  });
-  if (res.ok) {
-    window.location.href = './posts.html';
-  }
+
+    const token = localStorage.getItem('accessToken');
+
+    const res = await fetch(`http://localhost:8080/posts/${postId}`, {
+        method: 'DELETE',
+        headers: {Authorization: `Bearer ${token}`},
+    });
+    if (res.ok) {
+        window.location.href = './posts.html';
+    }
 });
 
 
@@ -171,10 +186,14 @@ commentInput.addEventListener('input', () => {
  commentCancel.addEventListener('click', () => closeModal(commentDeleteModal));
 
  commentConfirm.addEventListener('click', async () => {
-    const token = localStorage.getItem('token');
+
+    const token = localStorage.getItem('accessToken');
+
     const res = await fetch(`http://localhost:8080/posts/${postId}/comments/${commentDeleteTargetId}`,{
         method: 'DELETE',
-        headers: {'Authorization': `Bearer ${token}`},
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
     });
     if (res.ok){
         closeModal(commentDeleteModal);
@@ -184,7 +203,6 @@ commentInput.addEventListener('input', () => {
 
  commentForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
     const content = commentInput.value.trim();
 
     let url, method;
@@ -196,9 +214,14 @@ commentInput.addEventListener('input', () => {
         method = 'PUT';
     }
 
+    const token = localStorage.getItem('accessToken');
+
     const res = await fetch(url, {
         method,
-        headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify({content}),
     });
 

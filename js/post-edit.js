@@ -34,18 +34,18 @@ contentInput.addEventListener('input', checkForm);
 editForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const token = localStorage.getItem('token');
-
   let imageUrl = null;
   if(imageInput.files.length > 0){
     imageUrl = await uploadImage(imageInput.files[0]);
   }
 
+  const token = localStorage.getItem('accessToken');
+
   const res = await fetch(`http://localhost:8080/posts/${postId}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       title: titleInput.value.trim(),

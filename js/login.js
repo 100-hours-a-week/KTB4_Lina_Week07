@@ -75,7 +75,7 @@ loginForm.addEventListener('submit', async (e) => {
         console.log('서버 응답:', result);
 
         if (result.message === 'login_success'){
-            localStorage.setItem('token', result.data.token);
+            localStorage.setItem('accessToken', result.data.accessToken);
             window.location.href = './posts.html';
         } else {
             helperText.textContent = '아이디 또는 비밀번호를 확인해주세요';

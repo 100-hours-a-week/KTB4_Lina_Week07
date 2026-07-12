@@ -51,13 +51,13 @@ passwordConfirmInput.addEventListener('input', checkForm);
 passwordForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
 
     const res = await fetch('http://localhost:8080/users/password',{
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ 
             password: passwordInput.value.trim()
@@ -69,3 +69,9 @@ passwordForm.addEventListener('submit', async (e) => {
         setTimeout(() => toast.classList.remove('show'), 2000);
     }
 });
+
+ // 뒤로가기
+ const backBtn = document.getElementById('back-btn');
+ backBtn.addEventListener('click', () => {
+    window.location.href = './posts.html';
+ });
