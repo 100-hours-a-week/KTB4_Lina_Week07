@@ -37,15 +37,24 @@ async function loadPosts(){
   if (isLoading || !hasNext) return;
   isLoading = true;
 
+  try{
     const res = await fetch(`http://localhost:8080/posts?page=${currentPage}&limit=10`);
+
+    if(!res.ok){
+      throw new Error(`게시글 조회 실패: ${res.status}`);
+    }
+
     const result = await res.json();
     console.log(result);
 
-   result.data.posts.forEach(post => renderPost(post));
-
-   hasNext = result.data.hasNext;
-   currentPage++;
-   isLoading = false;
+    result.data.posts.forEach(post => renderPost(post));
+    hasNext = result.data.hasNext;
+    currentPage++;
+  } catch(error){
+    console.log('게시글을 불러오지 못했습니다.', error);
+  } finally {
+    isLoading = false;
+  }
 }
 
 // 숫자 포맷
