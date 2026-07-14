@@ -36,7 +36,7 @@ body {
   height: 40px;
   border-radius: 50%; /* 동그라미 */
   border: 1px solid #F0E4D2;
-  background-color: #F0E4D2; /* 이미지 들어오기 전 회색 원 */
+  background-color: #F0E4D2; /* 이미지 들어오기 전 배경 */
   cursor: pointer;
 }
 
@@ -48,7 +48,7 @@ body {
   padding: 40px 16px 80px;
 }
 
-/* 히어로: 한 줄 소개 + 인사 문구 + 키워드 태그 */
+/* 히어로: 인사 문구 + 키워드 태그 */
 .board-hero {
   text-align: center;
   margin-bottom: 28px;
@@ -106,7 +106,7 @@ body {
 }
 
 .write-btn:hover {
-  background-color: #F58220; /* 호버 시 진한 보라 */
+  background-color: #F58220; /* 호버 시 진한 오렌지 */
 }
 
 /* ===== 게시글 목록: 카드 그리드 (벨로그 스타일) ===== */
@@ -132,7 +132,7 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
-/* 썸네일: post.image가 있으면 JS에서 background-image로 채움. 없으면 회색 배경 그대로 노출 */
+/* 썸네일: post.image가 있으면 JS에서 background-image로 채움. 없으면 배경 그대로 노출 */
 .post-thumbnail {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -184,7 +184,7 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: #F0E4D2; /* 회색 원 (프로필 이미지 자리) */
+  background-color: #F0E4D2; /* 프로필 이미지 자리 */
   flex-shrink: 0;
 }
 
