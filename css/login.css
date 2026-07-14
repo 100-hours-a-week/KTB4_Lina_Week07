@@ -7,14 +7,14 @@
 
 body {
   font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
+  background-color: #FFF9ED;
+  color: #3D3028;
 }
 
 /* ===== 상단 헤더 ===== */
 .app-header {
   background-color: #fff;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #F0E4D2;
   padding: 24px 0;
   text-align: center;
 }
@@ -64,13 +64,13 @@ body {
   height: 40px;
   padding: 0 12px;
   font-size: 14px;
-  border: 1px solid #ccc;
+  border: 1px solid #F0E4D2;
   border-radius: 6px;
   outline: none; /* 클릭 시 기본 파란 테두리 제거 */
 }
 
 .field input:focus {
-  border-color: #7f6aee; /* 포커스되면 포인트 색으로 */
+  border-color: #F58220; /* 포커스되면 포인트 색으로 */
 }
 
 /* ===== helper text (검증/에러 메시지) ===== */
@@ -90,7 +90,7 @@ body {
   font-weight: 700;
   color: #fff;
 
-  background-color: #aca0eb; /* 기본(비활성 느낌) 색 */
+  background-color: #FF9F43; /* 기본(비활성 느낌) 색 */
   cursor: not-allowed; /* 아직 못 누르는 상태 표시 */
 
   transition: background-color 0.2s; /* 색 바뀔 때 부드럽게 */
@@ -101,7 +101,7 @@ body {
   예) loginBtn.classList.add('active'); loginBtn.disabled = false;
 */
 .login-btn.active {
-  background-color: #7f6aee;
+  background-color: #F58220;
   cursor: pointer;
 }
 
@@ -109,7 +109,7 @@ body {
 .signup-link {
   margin-top: 14px;
   font-size: 13px;
-  color: #333;
+  color: #3D3028;
   text-decoration: none;
 }
 

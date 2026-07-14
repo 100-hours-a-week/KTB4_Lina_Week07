@@ -29,6 +29,7 @@ const commentForm = document.getElementById('comment-form');
 
 let commentDeleteTargetId = null;
 let editingCommentId = null;
+let myUserId = null;
 
 // 숫자 포맷
 function formatCount(n){
@@ -37,6 +38,20 @@ function formatCount(n){
   }
   return n;
 }
+
+const token = localStorage.getItem('accessToken');
+
+async function loadMyUserId(){
+    const res = await fetch('http://localhost:8080/users/me', {
+    headers: { 
+        Authorization: `Bearer ${token}` 
+    },
+    });
+    const result = await res.json();
+    console.log(result);
+    return result;
+}
+
 
 // ?id= 읽어서 게시글 상세 불러오기
 function renderDetail(post){
@@ -63,22 +78,28 @@ function renderDetail(post){
         postImage.style.display = 'none';
     }
 
+    if(post.author.userId !== myUserId){
+        document.querySelector('.post-actions').classList.add('is-hidden');
+    }
+
     commentList.innerHTML = '';
     post.comments.forEach(comment => renderComment(comment));
 }
 
-// fetch 구현
 async function loadPostDetail(){
     const res = await fetch(`http://localhost:8080/posts/${postId}`);
     const result = await res.json();
     console.log(result);
-
-    renderDetail(result.data);
+    return result;
 }
 
-loadPostDetail();
+async function init(){
+    const [userRes, postRes] = await Promise.all([loadMyUserId(), loadPostDetail()]);
+    myUserId = userRes.data.user_id;
+    renderDetail(postRes.data);
+}
+init();
 
-// 좋아요 토글(event+fetch)
 likeBtn.addEventListener('click', async() => {
 
     const token = localStorage.getItem('accessToken');
@@ -165,11 +186,15 @@ function renderComment(comment){
     editBtn.addEventListener('click', () => {
         editingCommentId = comment.commentId;
         commentInput.value = comment.content;
-        commentSubmit.textContent = '댓글 수정';
+        commentSubmit.textContent = '창찬 수정';
         commentSubmit.disabled = false;
         commentSubmit.classList.add('active');
         commentInput.focus();
     });
+
+    if(comment.author.userId !== myUserId){
+        item.querySelector('.comment-actions').classList.add('is-hidden');
+    }
 }
 
 // 댓글 등록 (이벤트)
@@ -229,7 +254,7 @@ commentInput.addEventListener('input', () => {
         commentInput.value = '';
         commentSubmit.disabled = true;
         commentSubmit.classList.remove('active');
-        commentSubmit.textContent = '댓글 등록';  
+        commentSubmit.textContent = '칭찬 등록';  
         editingCommentId = null;                  
         loadPostDetail();
     }

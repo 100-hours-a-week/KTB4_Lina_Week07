@@ -11,9 +11,9 @@ function renderPost(post) {
   const card = document.createElement('article');
   card.className = 'post-card';
   card.innerHTML = `
+    <div class="post-thumbnail" style="background-image: url(${post.image});"></div>
     <h2 class="post-title">${post.title}</h2>
     <div class="post-meta">
-      <span class="post-stats">좋아요 ${formatCount(post.likesCount)}&nbsp;&nbsp;댓글 ${formatCount(post.commentsCount)}&nbsp;&nbsp;조회수 ${formatCount(post.viewsCount)}</span>
       <span class="post-date">${post.createdAt}</span>
     </div>
     <hr class="post-divider" />
@@ -21,6 +21,7 @@ function renderPost(post) {
       <span class="author-avatar" style="background-image: url(${post.author.profileImage});
       background-size: cover;"></span>
       <span class="author-name">${post.author.nickname}</span>
+      <span class="post-stats">잘했어요👏 ${formatCount(post.likesCount)}&nbsp;&nbsp;칭찬 ${formatCount(post.commentsCount)}&nbsp;&nbsp;조회수 ${formatCount(post.viewsCount)}</span>
     </div>
   `;
   // 카드 클릭 시 상세조회 이동

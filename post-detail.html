@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>게시글 상세조회</title>
+  <title>자랑 상세조회</title>
   <link rel="stylesheet" href="./css/post-detail.css" />
   <link rel="stylesheet" href="./css/header.css" />
 </head>
@@ -11,7 +11,7 @@
   <!-- 상단 헤더: 뒤로가기 + 제목 + 프로필 -->
   <header class="app-header">
     <button id="back-btn" class="icon-btn back-btn" aria-label="뒤로가기">&lt;</button>
-    <h1 class="app-title">아무 말 대잔치</h1>
+    <h1 class="app-title">사소한 자랑 대회</h1>
     <div class="profile-menu-wrap">
       <button id="profile-btn" class="profile-btn" aria-label="프로필"></button>
       <ul id="profile-dropdown" class="profile-dropdown">
@@ -52,7 +52,7 @@
       <!-- 좋아요는 클릭 가능한 버튼 (토글) -->
       <button id="like-btn" class="stat-box like-box">
         <span id="like-count" class="stat-num">0</span>
-        <span class="stat-label">좋아요수</span>
+        <span class="stat-label">박수 수</span>
       </button>
       <div class="stat-box">
         <span id="view-count" class="stat-num">0</span>
@@ -60,7 +60,7 @@
       </div>
       <div class="stat-box">
         <span id="comment-count" class="stat-num">0</span>
-        <span class="stat-label">댓글</span>
+        <span class="stat-label">칭찬</span>
       </div>
     </div>
 
@@ -68,10 +68,10 @@
 
     <!-- 댓글 입력 -->
     <form id="comment-form" class="comment-form">
-      <textarea id="comment-input" class="comment-input" placeholder="댓글을 남겨주세요!"></textarea>
+      <textarea id="comment-input" class="comment-input" placeholder="칭찬을 남겨주세요!"></textarea>
       <div class="comment-form-footer">
         <!-- 입력 전엔 비활성 (login/write 버튼과 같은 패턴) -->
-        <button type="submit" id="comment-submit" class="comment-submit" disabled>댓글 등록</button>
+        <button type="submit" id="comment-submit" class="comment-submit" disabled>칭찬 남기기</button>
       </div>
     </form>
 
@@ -83,7 +83,7 @@
   <!-- ===== 게시글 삭제 확인 모달 ===== -->
   <div id="post-delete-modal" class="modal-overlay">
     <div class="modal">
-      <h3 class="modal-title">게시글을 삭제하시겠습니까?</h3>
+      <h3 class="modal-title">자랑을 삭제하시겠습니까?</h3>
       <p class="modal-desc">삭제한 내용은 복구 할 수 없습니다.</p>
       <div class="modal-actions">
         <button class="modal-cancel">취소</button>
@@ -95,7 +95,7 @@
   <!-- ===== 댓글 삭제 확인 모달 ===== -->
   <div id="comment-delete-modal" class="modal-overlay">
     <div class="modal">
-      <h3 class="modal-title">댓글을 삭제하시겠습니까?</h3>
+      <h3 class="modal-title">칭찬을 삭제하시겠습니까?</h3>
       <p class="modal-desc">삭제한 내용은 복구 할 수 없습니다.</p>
       <div class="modal-actions">
         <button class="modal-cancel">취소</button>
