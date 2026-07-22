@@ -136,10 +136,33 @@ body {
   color: #8A7B70;
 }
 
-/* ===== 작성/수정 버튼 ===== */
-.submit-btn {
-  height: 44px;
+/* ===== 미리보기 + 작성/수정 버튼 줄 ===== */
+.btn-row {
+  display: flex;
+  gap: 8px;
   margin-top: 8px;
+}
+
+.preview-btn {
+  flex: 1;
+  height: 44px;
+  border: 1px solid #FF9F43;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #FF9F43;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.preview-btn:hover {
+  background-color: #FFF9ED;
+}
+
+.submit-btn {
+  flex: 1;
+  height: 44px;
   border: none;
   border-radius: 6px;
   font-size: 15px;
@@ -151,8 +174,151 @@ body {
   transition: background-color 0.2s;
 }
 
-/* 제목+내용 채워지면 JS에서 active 붙임 → 진한 보라 */
+/* 제목+내용 채워지면 JS에서 active 붙임 → 진한 오렌지 */
 .submit-btn.active {
   background-color: #F58220;
   cursor: pointer;
+}
+
+/* ===== 미리보기 모달 ===== */
+/* 오버레이: 화면 전체를 덮는 반투명 배경. JS에서 .show 토글로 열고 닫음 (post-detail과 동일 패턴) */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(61, 48, 40, 0.45);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.preview-modal {
+  width: 380px;
+  max-width: 90vw;
+  max-height: 80vh;
+  background-color: #fff;
+  border-radius: 16px;
+  overflow-y: auto;
+}
+
+.preview-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #F0E4D2;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
+
+.preview-modal-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3D3028;
+}
+
+.preview-close-btn {
+  font-size: 12px;
+  color: #8A7B70;
+  background: none;
+  border: 1px solid #F0E4D2;
+  padding: 5px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.preview-modal-body {
+  padding: 20px;
+}
+
+.preview-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #3D3028;
+  margin-bottom: 10px;
+}
+
+.preview-author-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.preview-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #F0E4D2;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+}
+
+.preview-author-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #3D3028;
+}
+
+.preview-divider {
+  border: none;
+  border-top: 1px solid #F0E4D2;
+  margin: 0 0 14px;
+}
+
+.preview-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #F0E4D2;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.preview-content {
+  font-size: 13px;
+  color: #3D3028;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin-bottom: 16px;
+}
+
+.preview-stats {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.preview-stat {
+  width: 88px;
+  background-color: #F0E4D2;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.preview-stat-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3D3028;
+  margin: 0;
+}
+
+.preview-stat-label {
+  font-size: 10px;
+  color: #8A7B70;
+  margin: 0;
+  white-space: nowrap;
 }

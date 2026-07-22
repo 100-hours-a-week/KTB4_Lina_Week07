@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>게시글 작성</title>
+  <title>자랑하기</title>
   <link rel="stylesheet" href="./css/write.css" />
   <link rel="stylesheet" href="./css/header.css" />
 </head>
@@ -24,7 +24,7 @@
 
   <main class="write">
     <!-- 작성/수정 모드에 따라 JS가 글자를 바꿈 (기본: 게시글 작성) -->
-    <h2 id="form-title" class="form-title">게시글 작성</h2>
+    <h2 id="form-title" class="form-title">자랑하기</h2>
 
     <form id="write-form" class="write-form" novalidate>
       <!-- 제목: 최대 26자 (maxlength로 27자 이상 입력 자체를 막음) -->
@@ -61,10 +61,48 @@
         </div>
       </div>
 
-      <!-- 작성/수정 버튼: 기본은 비활성, 제목+내용 채워지면 활성 (JS) -->
-      <button type="submit" id="submit-btn" class="submit-btn" disabled>완료</button>
+      <!-- 미리보기 + 작성 버튼: 기본은 비활성, 제목+내용 채워지면 활성 (JS) -->
+      <div class="btn-row">
+        <button type="button" id="preview-btn" class="preview-btn">미리보기</button>
+        <button type="submit" id="submit-btn" class="submit-btn" disabled>완료</button>
+      </div>
     </form>
   </main>
+
+  <!-- ===== 미리보기 모달: 제목/내용/이미지를 상세페이지 형태로 보여줌 (값 채우기는 JS) ===== -->
+  <div id="preview-modal" class="modal-overlay">
+    <div class="preview-modal">
+      <div class="preview-modal-header">
+        <span class="preview-modal-label">미리보기</span>
+        <button type="button" id="preview-close-btn" class="preview-close-btn">닫기</button>
+      </div>
+      <div class="preview-modal-body">
+        <h3 id="preview-title" class="preview-title"></h3>
+        <div class="preview-author-row">
+          <span id="preview-avatar" class="preview-avatar"></span>
+          <span id="preview-author-name" class="preview-author-name"></span>
+        </div>
+        <hr class="preview-divider" />
+        <div id="preview-thumb" class="preview-thumb"></div>
+        <p id="preview-content" class="preview-content"></p>
+        <div class="preview-stats">
+          <div class="preview-stat">
+            <p class="preview-stat-num">0</p>
+            <p class="preview-stat-label">잘했어요👏</p>
+          </div>
+          <div class="preview-stat">
+            <p class="preview-stat-num">0</p>
+            <p class="preview-stat-label">조회수</p>
+          </div>
+          <div class="preview-stat">
+            <p class="preview-stat-num">0</p>
+            <p class="preview-stat-label">칭찬</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="./js/header.js"></script>
 
   <script src="./js/upload.js"></script>
